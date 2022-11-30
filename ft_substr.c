@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	value_of_malloc(char const *s, unsigned int start, size_t len)
+int	valueof_malloc(char const *s, unsigned int start, size_t len)
 {
 	size_t	cpt;
 
@@ -31,7 +31,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	i;
 
 	i = 0;
-	new_str = malloc ((value_of_malloc(s, start, len) + 1) * sizeof(char));
+	if (!s)
+		return (NULL);
+	new_str = malloc ((valueof_malloc(s, start, len) + 1) * sizeof(char));
 	if (!new_str)
 		return (NULL);
 	if (start < ft_strlen(s))

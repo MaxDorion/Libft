@@ -25,7 +25,7 @@ size_t	ft_len_int(int n)
 	return (count_char);
 }
 
-char	*num_to_char(char *ptr, int count_char, long long int n2)
+char	*num_to_char(char *ptr, int count_char, long n2)
 {
 	ptr[count_char + 1] = '\0';
 	if (n2 < 0)
@@ -47,9 +47,9 @@ char	*num_to_char(char *ptr, int count_char, long long int n2)
 
 char	*ft_itoa(int n)
 {
-	int				count_char;
-	char			*ptr;
-	long long int	n2;
+	int		count_char;
+	char	*ptr;
+	long	n2;
 
 	n2 = n;
 	count_char = ft_len_int(n);
