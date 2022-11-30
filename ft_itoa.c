@@ -16,8 +16,10 @@ size_t	ft_len_int(int n)
 {
 	size_t	count_char;
 
-	count_char = 1;
-	while (n / 10)
+	count_char = 0;
+	if (n <= 0)
+		count_char++;
+	while (n != 0)
 	{
 		count_char++;
 		n = n / 10;
@@ -25,40 +27,32 @@ size_t	ft_len_int(int n)
 	return (count_char);
 }
 
-char	*num_to_char(char *ptr, int count_char, long n2)
+int	negative_to_positive(int n)
 {
-	ptr[count_char + 1] = '\0';
-	if (n2 < 0)
-	{
-		ptr[0] = '-';
-		count_char++;
-		n2 = n2 * (-1);
-	}
-	count_char--;
-	while (n2 / 10)
-	{
-		ptr[count_char] = (n2 % 10) + '0';
-		n2 = n2 / 10;
-		count_char--;
-	}
-	ptr[count_char] = (n2 + '0');
-	return (ptr);
+	if (n < 0)
+		return (-n);
+	return (n);
 }
 
 char	*ft_itoa(int n)
 {
 	int		count_char;
 	char	*ptr;
-	long	n2;
 
-	n2 = n;
 	count_char = ft_len_int(n);
-	if (n >= 0)
-		ptr = malloc (sizeof(char) * (count_char + 1));
-	if (n < 0)
-		ptr = malloc (sizeof(char) * (count_char + 2));
+	ptr = malloc (sizeof(char) * (count_char + 1));
 	if (!ptr)
 		return (NULL);
-	ptr = num_to_char(ptr, count_char, n2);
+	ptr[count_char--] = '\0';
+	if (n < 0)
+		ptr[0] = '-';
+	else if (n == 0)
+		ptr[0] = '0';
+	while (n != 0)
+	{
+		ptr[count_char] = negative_to_positive(n % 10) + '0';
+		count_char--;
+		n = n / 10;
+	}
 	return (ptr);
 }
